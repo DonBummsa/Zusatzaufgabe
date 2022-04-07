@@ -1,3 +1,4 @@
+package aufgabe1;
 /**
  * Expression stellt einen Ausdruck dar, der mit der eval()-Methode evaluiert/ausgewertet werden kann. Der Ausdruck
  * kann eine Variable x enthalten, die als Argument an eval übergeben wird.
