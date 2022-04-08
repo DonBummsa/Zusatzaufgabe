@@ -96,7 +96,8 @@ public class Grid extends JFrame {
 		
 		g1.setStroke(new BasicStroke(2));
 		g1.setColor(c);
-		
+//		e.eval(i);
+	
 		}
 	}
 
