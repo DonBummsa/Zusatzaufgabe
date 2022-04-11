@@ -111,7 +111,7 @@ public class Grid extends JFrame {
 		int[] xpoints = new int[width];
 		int[] ypoints = new int[width];
 		for (int i = -width / 2; i < width / 2; i++) {
-			int wert_1 = (int) Math.round(e.eval((double)i/largetick)*largetick );
+			int wert_1 = (int) Math.round(e.eval((double)i/largetick)*largetick ); //x werte der funktion in f
 			ypoints[i + width / 2] = -wert_1;
 			xpoints[i + width / 2] = i;
 //			g1.drawLine(i, wert_1, wert_2, i+pixelratio);
@@ -120,7 +120,7 @@ public class Grid extends JFrame {
 		g1.setColor(c);
 	
 		for (int n = 0; n < width-1 ; n++) {
-			g1.drawLine(xpoints[n], ypoints[n], xpoints[n + 1], ypoints[n + 1]);
+			g1.drawLine(xpoints[n], ypoints[n], xpoints[n + 1], ypoints[n + 1]);	// der malt linien
 //			System.out.println(xpoints[n]);
 			
 		}
