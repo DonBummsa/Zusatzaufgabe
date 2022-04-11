@@ -8,6 +8,7 @@ import java.applet.*;
 public class Grid extends JFrame {
 	public static int width = 1024;
 	public static int height = 786;
+	public static int pixelratio = 10;
 
 	/**
 	 * Konstruktor aus der Übung
@@ -90,14 +91,17 @@ public class Grid extends JFrame {
 	public void plot(Graphics g, Expression e, Color c) {
 
 		Graphics2D g1 = (Graphics2D) g;
-		
-		for(int i = -7; i<8; i++) {
-		
-		
-		g1.setStroke(new BasicStroke(2));
-		g1.setColor(c);
-		
+		int [] xpoints = new int[width/pixelratio];
+		int [] ypoints = new int[width/pixelratio];
+		for (int i = -width / 2; i < width; i = i + pixelratio) {
+			int wert_1 = (int) Math.round(e.eval(i)) * pixelratio;
+			xpoints[i+width/2]= wert_1;
+			ypoints[i+width/2]=i;
+			// g1.drawLine(i, wert_1, wert_2, i+pixelratio);
+			// g1.drawLine(i+pixelratio, wert_2,i+3*pixelratio, wert_3);
 		}
+		g1.setColor(c);
+		g1.drawPolyline(xpoints, ypoints, width/pixelratio);
 	}
 
 	/**
