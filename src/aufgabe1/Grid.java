@@ -91,18 +91,21 @@ public class Grid extends JFrame {
 	public void plot(Graphics g, Expression e, Color c) {
 
 		Graphics2D g1 = (Graphics2D) g;
-		int [] xpoints = new int[width/pixelratio];
-		int [] ypoints = new int[width/pixelratio];
-		for (int i = -width / 2; i < width; i = i + pixelratio) {
+		int[] xpoints = new int[width * 10];
+		int[] ypoints = new int[width * 10];
+		for (int i = -width / 2; i < width / 2; i = i + pixelratio) {
 			int wert_1 = (int) Math.round(e.eval(i)) * pixelratio;
-			xpoints[i+width/2]= wert_1;
-			ypoints[i+width/2]=i;
+			xpoints[i + width / 2] = wert_1;
+			ypoints[i + width / 2] = i;
 			// g1.drawLine(i, wert_1, wert_2, i+pixelratio);
 			// g1.drawLine(i+pixelratio, wert_2,i+3*pixelratio, wert_3);
 		}
 		g1.setColor(c);
-		g1.drawPolyline(xpoints, ypoints, width/pixelratio);
+		for (int n = 0; n < width / pixelratio; n++) {
+			g1.drawLine(xpoints[n], ypoints[n], xpoints[n + 1], ypoints[n + 1]);
+		}
 	}
+	
 
 	/**
 	 * paint-Methode wie in der Vorlesung
