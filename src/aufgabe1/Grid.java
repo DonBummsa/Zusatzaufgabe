@@ -102,10 +102,10 @@ public class Grid extends JFrame {
 		}
 		g1.setColor(c);
 		for (int n = 0; n < width / pixelratio; n++) {
-			g1.drawLine(xpoints[n], ypoints[n], xpoints[n + 1], ypoints[n + 1]);
+			g1.drawLine(xpoints[n], ypoints[n], xpoints[n + 1], ypoints[n + 1])+1;
 		}
 	}
-	
+	//push
 
 	/**
 	 * paint-Methode wie in der Vorlesung
