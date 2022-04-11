@@ -3,13 +3,14 @@ package aufgabe1;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 import java.applet.*;
  
 public class Grid extends JFrame {
 	public static int width = 1024;
 	public static int height = 786;
-	public static int pixelratio = 10;
- 
+	public static int largetick = 80;
+	public static int smalltick = 16;
 	/**
 	 * Konstruktor aus der Übung
 	 */
@@ -24,9 +25,8 @@ public class Grid extends JFrame {
 	public static void main(String[] args) {
 		new Grid();
 	}
- 
-	int center_x = 1024;
-	int center_y = 512;
+	
+	
  
 	// TODO: implementiere ein Koordinatenkreuz
 	/**
@@ -34,12 +34,15 @@ public class Grid extends JFrame {
 	 */
 	public void coordinates(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
+		g2.setColor(Color.WHITE);
+		g2.fillRect(0,0,width,height); 
 		g2.translate(width / 2, height / 2);
+		
 		g2.setStroke(new BasicStroke(1));
-		Color lighterGray = new Color(211, 211, 211); // Color white
+		Color lighterGray = new Color(211, 211, 211); // Color white.grey
 		for (int i = -width / 2; i < width / 2; i++) {
  
-			if (i % 16 == 0) {
+			if (i % smalltick == 0) {
  
 				g2.setColor(lighterGray);
 				g2.drawLine(i, -width, i, width);
@@ -48,7 +51,7 @@ public class Grid extends JFrame {
 			}
  
 			g2.setColor(Color.LIGHT_GRAY);
-			if (i % 80 == 0) {
+			if (i % largetick == 0) {
 				g2.drawLine(i, -width, i, width);
 				g2.drawLine(-height, i, height, i);
  
@@ -66,17 +69,31 @@ public class Grid extends JFrame {
 	 * labels zeichnet Achsenbeschriftungen bei ganzen Zahlen.
 	 */
 	public void labels(Graphics g) {
- 
+		
 		Graphics2D g2d = (Graphics2D) g;
+		
+		g2d.setColor(Color.BLACK);
 		for (int i = -width / 2; i < width / 2; i++) {
- 
-			String a = String.valueOf(-i / 80);
-			if (i % 80 == 0) {
-				g2d.drawString(a, i, -2);
+			
+						
+			String a = String.valueOf(-i / largetick);
+			
+			FontMetrics babada = g2d.getFontMetrics();
+			Rectangle2D rec2d = babada.getStringBounds(a, g2d);
+			
+			if (i % largetick == 0 && i != 0 ) {
+			
+				g2d.setColor(Color.WHITE);
+				g2d.fillRect(-i, -6-(int)rec2d.getHeight(),(int)rec2d.getWidth(),(int)rec2d.getHeight());
+				g2d.setColor(Color.BLACK);
+				g2d.drawString(a, -i, -6);
 			}
-			if (i != 0 && i % 80 == 0) {
-				g2d.drawString(a, 2, i);
- 
+			if ( i != 0 && i % largetick == 0) {
+				g2d.setColor(Color.WHITE);
+				g2d.fillRect(6, i-(int)rec2d.getHeight(),(int)rec2d.getWidth(),(int)rec2d.getHeight());
+				g2d.setColor(Color.BLACK);
+				g2d.drawString(a, 6, i);
+				
 			}
  
 		}
@@ -91,19 +108,23 @@ public class Grid extends JFrame {
 	public void plot(Graphics g, Expression e, Color c) {
  
 		Graphics2D g1 = (Graphics2D) g;
-		int[] xpoints = new int[width * 10];
-		int[] ypoints = new int[width * 10];
-		for (int i = -width / 2; i < width / 2; i = i + pixelratio) {
-			int wert_1 = (int) Math.round(e.eval(i)) * pixelratio;
-			xpoints[i + width / 2] = wert_1;
-			ypoints[i + width / 2] = i;
-			// g1.drawLine(i, wert_1, wert_2, i+pixelratio);
-			// g1.drawLine(i+pixelratio, wert_2,i+3*pixelratio, wert_3);
+		int[] xpoints = new int[width];
+		int[] ypoints = new int[width];
+		for (int i = -width / 2; i < width / 2; i++) {
+			int wert_1 = (int) Math.round(e.eval((double)i/largetick)*largetick );
+			ypoints[i + width / 2] = -wert_1;
+			xpoints[i + width / 2] = i;
+//			g1.drawLine(i, wert_1, wert_2, i+pixelratio);
+//			g1.drawLine(i+pixelratio, wert_2,i+3*pixelratio, wert_3);
 		}
 		g1.setColor(c);
-		for (int n = 0; n < width / pixelratio; n++) {
+	
+		for (int n = 0; n < width-1 ; n++) {
 			g1.drawLine(xpoints[n], ypoints[n], xpoints[n + 1], ypoints[n + 1]);
+//			System.out.println(xpoints[n]);
+			
 		}
+		
 	}
 	//push
  
@@ -111,12 +132,19 @@ public class Grid extends JFrame {
 	 * paint-Methode wie in der Vorlesung
 	 */
 	public void paint(Graphics g) {
+		
+		
+		
 		coordinates(g);
+		plot(g, new HardcodedSin(), Color.RED);
+		plot(g, new HardcodedTan(), Color.GREEN);
+		plot(g, new Hardcodedirgendwas(), Color.BLUE);
+		plot(g, new Hardcodedirgendwas2(), Color.MAGENTA);
 		labels(g);
 		// TODO: Hier weitere Beispiele einfügen
 		// TODO: An diese Stelle sollst Du auch in den spÃ¤teren Aufgabenteilen jeweils
 		// Funktionen in unterschiedlicher Syntax schreiben.
-		plot(g, new HardcodedSin(), Color.RED);
+		
 	}
 }
  
