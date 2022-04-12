@@ -108,17 +108,26 @@ public class Grid extends JFrame {
 		Graphics2D g1 = (Graphics2D) g;
 		int[] xpoints = new int[width];
 		int[] ypoints = new int[width];
-		
+
 		for (int i = -width / 2; i < width / 2; i++) {
 			if (Double.isNaN(e.eval((double) i))) {
-				continue; // für sqrt?
+				continue;
 			}
-			if (Double.isInfinite(e.eval((double) i))) {
-				continue; // für sqrt?
+			if (Double.isInfinite(-e.eval((double) i))) {
+				continue;
 			}
-			
+//			if ((double) Math.round(e.eval((double) i / largetick) * largetick)>6000){
+//				continue;
+//			}
+//			if ((int) Math.round(e.eval((double) i / largetick) * largetick) > 0
+//					&& (int) Math.round(e.eval((double) i + 1 / largetick) * largetick) < 0) {
+//
+//				continue;
+//
+//			}
+
 			int wert_1 = (int) Math.round(e.eval((double) i / largetick) * largetick); // x werte der funktion in f
-			
+
 			ypoints[i + width / 2] = -wert_1;
 			xpoints[i + width / 2] = i;
 
@@ -127,7 +136,7 @@ public class Grid extends JFrame {
 
 		for (int n = 0; n < width - 1; n++) {
 
-			System.out.println(ypoints[n]);	//debug
+			System.out.println(ypoints[n]); // debug
 			g1.drawLine(xpoints[n], ypoints[n], xpoints[n + 1], ypoints[n + 1]); // der malt linien
 
 		}
@@ -139,15 +148,14 @@ public class Grid extends JFrame {
 	 */
 	public void paint(Graphics g) {
 		coordinates(g);
-		plot(g, new HardcodedSin(), Color.RED);
-		plot(g, new HardcodedTan(), Color.GREEN);
-		plot(g, new Hardcodedirgendwas(), Color.BLUE);
+//		plot(g, new HardcodedSin(), Color.RED);
+//		plot(g, new HardcodedTan(), Color.GREEN);
+	//	plot(g, new Hardcodedirgendwas(), Color.BLUE);
 		plot(g, new Hardcodedirgendwas2(), Color.MAGENTA);
 		labels(g);
 		// TODO: Hier weitere Beispiele einfügen
 		// TODO: An diese Stelle sollst Du auch in den spÃ¤teren Aufgabenteilen jeweils
 		// Funktionen in unterschiedlicher Syntax schreiben.
-		double a = Math.tan(Math.PI/2);
-		System.out.println(a);
+
 	}
 }
