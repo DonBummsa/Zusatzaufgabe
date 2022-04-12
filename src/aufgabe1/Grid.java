@@ -109,7 +109,7 @@ public class Grid extends JFrame {
 		int[] xpoints = new int[width];
 		int[] ypoints = new int[width];
 
-		for (int i = -width / 2; i < width / 2; i++) {
+		for (int i = -width / 2; i < width / 2; i=i+1) {
 			if (Double.isNaN(e.eval((double) i))) {
 				continue;
 			}
@@ -148,11 +148,12 @@ public class Grid extends JFrame {
 	 */
 	public void paint(Graphics g) {
 		coordinates(g);
-//		plot(g, new HardcodedSin(), Color.RED);
-//		plot(g, new HardcodedTan(), Color.GREEN);
-	//	plot(g, new Hardcodedirgendwas(), Color.BLUE);
+		plot(g, new HardcodedSin(), Color.RED);
+		plot(g, new HardcodedTan(), Color.GREEN);
+		plot(g, new Hardcodedirgendwas(), Color.BLUE);
 		plot(g, new Hardcodedirgendwas2(), Color.MAGENTA);
 		labels(g);
+		
 		// TODO: Hier weitere Beispiele einfügen
 		// TODO: An diese Stelle sollst Du auch in den spÃ¤teren Aufgabenteilen jeweils
 		// Funktionen in unterschiedlicher Syntax schreiben.
