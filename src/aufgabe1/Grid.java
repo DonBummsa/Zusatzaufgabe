@@ -9,8 +9,8 @@ import java.applet.*;
 public class Grid extends JFrame {
 	public static int width = 1024;
 	public static int height = 786;
-	public static int largetick = 80;
-	public static int smalltick = 16;
+	public static int largetick = 80; // entspricht 1
+	public static int smalltick = 16; // entspricht 0,2 
 	/**
 	 * Konstruktor aus der ‹bung
 	 */
@@ -34,9 +34,9 @@ public class Grid extends JFrame {
 	 */
 	public void coordinates(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(Color.WHITE);
+		g2.setColor(Color.WHITE); 			// weiﬂer hintergrund
 		g2.fillRect(0,0,width,height); 
-		g2.translate(width / 2, height / 2);
+		g2.translate(width / 2, height / 2);	// koordinaten auf den mittelpunkt verschieben
 		
 		g2.setStroke(new BasicStroke(1));
 		Color lighterGray = new Color(211, 211, 211); // Color white.grey
@@ -114,25 +114,23 @@ public class Grid extends JFrame {
 			int wert_1 = (int) Math.round(e.eval((double)i/largetick)*largetick ); //x werte der funktion in f
 			ypoints[i + width / 2] = -wert_1;
 			xpoints[i + width / 2] = i;
-//			g1.drawLine(i, wert_1, wert_2, i+pixelratio);
-//			g1.drawLine(i+pixelratio, wert_2,i+3*pixelratio, wert_3);
+
 		}
 		g1.setColor(c);
 	
 		for (int n = 0; n < width-1 ; n++) {
 			g1.drawLine(xpoints[n], ypoints[n], xpoints[n + 1], ypoints[n + 1]);	// der malt linien
-//			System.out.println(xpoints[n]);
+
 			
 		}
 		
 	}
-	//push
+	
  
 	/**
 	 * paint-Methode wie in der Vorlesung
 	 */
 	public void paint(Graphics g) {
-		
 		
 		
 		coordinates(g);
