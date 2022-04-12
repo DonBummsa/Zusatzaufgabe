@@ -5,6 +5,6 @@ package aufgabe1;
 public class HardcodedTan extends Expression {
     @Override
     public double eval(double x) {
-        return Math.tan(x);
+        return Math.sin(x)/Math.cos(x);
     }
 }

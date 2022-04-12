@@ -108,11 +108,17 @@ public class Grid extends JFrame {
 		Graphics2D g1 = (Graphics2D) g;
 		int[] xpoints = new int[width];
 		int[] ypoints = new int[width];
-
+		
 		for (int i = -width / 2; i < width / 2; i++) {
+			if (Double.isNaN(e.eval((double) i))) {
+				continue; // für sqrt?
+			}
+			if (Double.isInfinite(e.eval((double) i))) {
+				continue; // für sqrt?
+			}
+			
 			int wert_1 = (int) Math.round(e.eval((double) i / largetick) * largetick); // x werte der funktion in f
-//			if(wert_1==0)
-//				continue;		// für sqrt?
+			
 			ypoints[i + width / 2] = -wert_1;
 			xpoints[i + width / 2] = i;
 
@@ -121,7 +127,7 @@ public class Grid extends JFrame {
 
 		for (int n = 0; n < width - 1; n++) {
 
-//			System.out.println(ypoints[n]);	//debug
+			System.out.println(ypoints[n]);	//debug
 			g1.drawLine(xpoints[n], ypoints[n], xpoints[n + 1], ypoints[n + 1]); // der malt linien
 
 		}
@@ -141,6 +147,7 @@ public class Grid extends JFrame {
 		// TODO: Hier weitere Beispiele einfügen
 		// TODO: An diese Stelle sollst Du auch in den spÃ¤teren Aufgabenteilen jeweils
 		// Funktionen in unterschiedlicher Syntax schreiben.
-
+		double a = Math.tan(Math.PI/2);
+		System.out.println(a);
 	}
 }
