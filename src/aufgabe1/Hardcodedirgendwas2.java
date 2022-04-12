@@ -5,6 +5,6 @@ package aufgabe1;
 public class Hardcodedirgendwas2 extends Expression {
     @Override
     public double eval(double x) {
-        return Math.pow(x, 0.5);
+        return Math.pow(x, 1.5);
     }
 }
