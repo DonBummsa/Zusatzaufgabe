@@ -114,12 +114,14 @@ public class Grid extends JFrame {
 			int wert_1 = (int) Math.round(e.eval((double) i / largetick) * largetick);
 
 			if (Double.isNaN(e.eval((double) i))) {
+				ypoints[i + width / 2] = Stop;
 				continue;
 			}
 			if (Double.isInfinite(-e.eval((double) i))) {
+				ypoints[i + width / 2] = Stop;
 				continue;
 			}
-			if ((double) Math.round(e.eval((double) i / largetick) * largetick) > 6000) {
+			if ((double) Math.round(e.eval((double) i / largetick) * largetick) > width) {
 				ypoints[i + width / 2] = Stop;
 				continue;
 			}
