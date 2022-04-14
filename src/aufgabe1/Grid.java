@@ -108,25 +108,27 @@ public class Grid extends JFrame {
 		Graphics2D g1 = (Graphics2D) g;
 		int[] xpoints = new int[width];
 		int[] ypoints = new int[width];
+		int Stop = 999999;
 
-		for (int i = -width / 2; i < width / 2; i=i+1) {
+		for (int i = -width / 2; i < width / 2; i = i + 1) {
+			int wert_1 = (int) Math.round(e.eval((double) i / largetick) * largetick);
+
 			if (Double.isNaN(e.eval((double) i))) {
 				continue;
 			}
 			if (Double.isInfinite(-e.eval((double) i))) {
 				continue;
 			}
-//			if ((double) Math.round(e.eval((double) i / largetick) * largetick)>6000){
-//				continue;
-//			}
+			if ((double) Math.round(e.eval((double) i / largetick) * largetick) > 6000) {
+				ypoints[i + width / 2] = Stop;
+				continue;
+			}
 //			if ((int) Math.round(e.eval((double) i / largetick) * largetick) > 0
 //					&& (int) Math.round(e.eval((double) i + 1 / largetick) * largetick) < 0) {
 //
 //				continue;
 //
 //			}
-
-			int wert_1 = (int) Math.round(e.eval((double) i / largetick) * largetick); // x werte der funktion in f
 
 			ypoints[i + width / 2] = -wert_1;
 			xpoints[i + width / 2] = i;
@@ -135,8 +137,13 @@ public class Grid extends JFrame {
 		g1.setColor(c);
 
 		for (int n = 0; n < width - 1; n++) {
-
-			System.out.println(ypoints[n]); // debug
+			if (ypoints[n] == Stop) {
+				continue;
+			}
+			if (ypoints[n + 1] == Stop) {
+				continue;
+			}
+		//	System.out.println(ypoints[n]); // debug
 			g1.drawLine(xpoints[n], ypoints[n], xpoints[n + 1], ypoints[n + 1]); // der malt linien
 
 		}
@@ -153,7 +160,7 @@ public class Grid extends JFrame {
 		plot(g, new Hardcodedirgendwas(), Color.BLUE);
 		plot(g, new Hardcodedirgendwas2(), Color.MAGENTA);
 		labels(g);
-		
+
 		// TODO: Hier weitere Beispiele einfügen
 		// TODO: An diese Stelle sollst Du auch in den spÃ¤teren Aufgabenteilen jeweils
 		// Funktionen in unterschiedlicher Syntax schreiben.
